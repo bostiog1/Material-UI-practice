@@ -1,4 +1,4 @@
-import { Container, Grid, Grid2, Paper } from "@mui/material";
+import { Container } from "@mui/material";
 import { useState, useEffect } from "react";
 import NoteCard from "../components/NoteCard";
 import Masonry from "react-masonry-css";
@@ -16,15 +16,16 @@ export default function Notes() {
     await fetch("http://localhost:8000/notes" + id, {
       method: "DELETE",
     });
-    const newNotes = notes.filter((note) => note.id != id);
+    const newNotes = notes.filter((note) => note.id !== id);
     setNotes(newNotes);
   };
 
   const breakpoints = {
     default: 3,
-    1100: 2,
-    700: 1,
+    1200: 2,
+    800: 1,
   };
+
   return (
     <Container>
       <Masonry
@@ -33,10 +34,8 @@ export default function Notes() {
         columnClassName="my-masonry-grid_column"
       >
         {notes.map((note) => (
-          <div item="true" key={note.id}>
-            <NoteCard note={note} handleDelete={handleDelete}>
-              {note.title}
-            </NoteCard>
+          <div key={note.id}>
+            <NoteCard note={note} handleDelete={handleDelete} />
           </div>
         ))}
       </Masonry>
