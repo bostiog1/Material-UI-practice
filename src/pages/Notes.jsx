@@ -13,17 +13,18 @@ export default function Notes() {
   }, []);
 
   const handleDelete = async (id) => {
-    await fetch("http://localhost:8000/notes" + id, {
+    await fetch("http://localhost:8000/notes/" + id, {  // Added "/" before id
       method: "DELETE",
     });
     const newNotes = notes.filter((note) => note.id !== id);
     setNotes(newNotes);
   };
 
+  // Masonry breakpoints for responsive layout
   const breakpoints = {
-    default: 3,
-    1200: 2,
-    800: 1,
+    default: 3,  // 3 columns on large screens
+    1200: 2,     // 2 columns on medium screens
+    800: 1,      // 1 column on small screens
   };
 
   return (
